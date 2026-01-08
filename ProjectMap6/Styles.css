@@ -1,0 +1,101 @@
+.project-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.project-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: Franklin Gothic Book;
+  font-color: #2a2e32;
+}
+
+.project-buttons {
+  flex-shrink: 0;
+  margin-left: 5px;
+}
+
+.project-buttons button {
+  margin-left: 2px;
+}
+
+/* Правая панель */
+#right-panel {
+  width: 300px;
+  padding: 10px;
+  background: #edeff1;
+  border-left: 1px solid #ccc;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  font-family: Franklin Gothic Book;
+  font-color: #2a2e32;
+}
+
+/* левая панель */
+#left-panel {
+  width: 300px;
+  padding: 10px;
+  background: #edeff1;
+  border-left: 1px solid #ccc;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  font-family: Franklin Gothic Book;
+  font-color: #2a2e32;
+}
+
+/* Контейнер описания/редактирования */
+#right-desc, #edit-container {
+  margin-top: 10px;
+  font-family: Franklin Gothic Book;
+  font-color: #2a2e32;
+}
+
+#edit-name, #edit-desc, #edit-city {
+  width: 100%;       /* поле растягивается на ширину панели */
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  font-family: Franklin Gothic Book;
+  font-color: #2a2e32;
+}
+
+#edit-desc {
+  height: 240px;     /* высота текстового поля */
+  resize: vertical;  /* пользователь сможет менять высоту */
+}
+
+
+/* Скрываем редактирование по умолчанию */
+#edit-container {
+  display: none;
+  flex-direction: column;
+}
+
+#edit-container input,
+#edit-container textarea,
+#save-project {
+  margin-top: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.right-panel.active {
+  display: flex;
+}
+
+.map-and-panel {
+  display: flex;
+  flex: 1;
+}
+
+.project-marker {
+  border-radius: 0 !important;
+  z-index: 1000;
+}
+
