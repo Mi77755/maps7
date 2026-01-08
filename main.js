@@ -47,6 +47,14 @@ window.onload = () => {
     dragPan: true // можно отключить, если нужно
   });
 
+  // ❌ полностью фиксируем карту
+  map.dragPan.disable();
+  map.scrollZoom.disable();
+  map.doubleClickZoom.disable();
+  map.boxZoom.disable();
+  map.keyboard.disable();
+  map.touchZoomRotate.disable();
+  
   // Добавление маркера на карту
   function addProjectToMap(project) {
     if (project.marker) return;
@@ -201,4 +209,5 @@ window.onload = () => {
 
     form.reset();
   });
+
 };
