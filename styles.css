@@ -26,9 +26,9 @@
 /* Правая панель */
 #right-panel {
   width: 300px;
-  padding: 10px;
+  padding: 30px;
   background: white;
-  border-left: 1px solid #ccc;
+  border-left: 3px solid #ccc;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -39,9 +39,9 @@
 /* левая панель */
 #left-panel {
   width: 300px;
-  padding: 10px;
-  background: #edeff1;
-  border-left: 1px solid #ccc;
+  padding: 30px;
+  background: white;
+  border-left: 3px solid #ccc;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -98,6 +98,7 @@
   border-radius: 0 !important;
   z-index: 1000;
 }
+
 
 
 
