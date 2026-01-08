@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Mappa dei Progetti</title>
+  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body, html { margin: 0; height: 100%; }
+    .container { display: flex; height: 100vh; }
+    #map { flex: 1; }
+    .sidebar { width: 300px; padding: 10px; background: #f0f0f0; overflow-y: auto; }
+    .project-marker { border-radius: 50%; }
+    #popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #333; display: none; z-index: 10; }
+    #popup.hidden { display: none; }
+    #popup-close { cursor: pointer; float: right; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="sidebar left" id="left-panel">
+    <h2>Progetti</h2>
+    <ul id="project-list"></ul>
+
+    <h3>Aggiungi progetto</h3>
+    <form id="project-form">
+      <input type="text" id="proj-name" placeholder="Nome del progetto" required><br>
+      <textarea id="proj-desc" placeholder="Descrizione" required></textarea><br>
+      <input type="text" id="proj-city" placeholder="Città" required><br>
+      <button type="submit">Aggiungi</button>
+    </form>
+  </div>
+
+   <div class="map-and-panel" style="display:flex; flex:1; position:relative;">
+    <div id="map" style="flex:1;"></div>
+
+  <div class="sidebar right" id="right-panel">
+  <h2 id="right-title">Project</h2>
+  <p id="right-desc"></p>
+
+  <!-- Форма редактирования скрыта изначально -->
+  <div id="edit-form" style="display:none;">
+    <input id="edit-name" placeholder="Nome del progetto" />
+    <textarea id="edit-desc" placeholder="Descrizione"></textarea>
+    <input id="edit-city" placeholder="Localita'" />
+    <button id="save-project">Salvare</button>
+  </div>
+
+  <button id="edit-btn">Modifica</button> <!-- открывает форму -->
+</div>
+
+<div id="popup" class="hidden">
+ <div id="popup-content">
+  <span id="popup-close">&times;</span>
+  <h2 id="popup-title"></h2>
+ </div>
+</div>
+
+
+<!-- MapLibre GL -->
+<script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+
+<!-- Firebase compat SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<!-- Firebase config -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyADDur39N1VtJ4Z8jAVeRox-UtXIF4u56I",
+    authDomain: "maps79-ee8c4.firebaseapp.com",
+    databaseURL: "https://maps79-ee8c4-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "maps79-ee8c4",
+    storageBucket: "maps79-ee8c4.appspot.com",
+    messagingSenderId: "26680167320",
+    appId: "1:26680167320:web:f24ef3b7f544a9a3e5b9ed"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const projectsRef = db.ref('projects');
+</script>
+
+<script src="main.js"></script>
+</body>
+</html>
