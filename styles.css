@@ -27,8 +27,7 @@
 #right-panel {
   width: 300px;
   padding: 10px;
-  background: #edeff1;
-  background: transparent;
+  background: white;
   border-left: 1px solid #ccc;
   overflow-y: auto;
   display: flex;
@@ -99,5 +98,6 @@
   border-radius: 0 !important;
   z-index: 1000;
 }
+
 
 
