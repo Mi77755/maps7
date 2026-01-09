@@ -11,6 +11,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: Franklin Gothic Book;
+  font-size: 24pt;
   font-color: #2a2e32;
 }
 
@@ -25,7 +26,7 @@
 
 /* Правая панель */
 #right-panel {
-  width: 300px;
+  width: 280px;
   padding: 30px;
   background: white;
   border-left: 1px solid #2a2e32;
@@ -38,7 +39,7 @@
 
 /* левая панель */
 #left-panel {
-  width: 300px;
+  width: 280px;
   padding: 30px;
   background: white;
   border-right: 1px solid #2a2e32;
@@ -98,6 +99,7 @@
   border-radius: 0 !important;
   z-index: 1000;
 }
+
 
 
 
