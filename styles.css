@@ -41,7 +41,7 @@
   width: 300px;
   padding: 30px;
   background: white;
-  border-left: 3px solid #ccc;
+  border-right: 3px solid #ccc;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -98,6 +98,7 @@
   border-radius: 0 !important;
   z-index: 1000;
 }
+
 
 
 
