@@ -59,15 +59,15 @@ window.onload = () => {
   function addProjectToMap(project) {
   if (project.marker) return;
 
-  // контейнер маркера
+  // контейнер = геоякорь
   const el = document.createElement('div');
-  el.style.display = 'flex';
-  el.style.flexDirection = 'column';
-  el.style.alignItems = 'center';
-  el.style.transform = 'translate(-50%, -100%)'; // важное!
+  el.className = 'project-marker';
+  el.style.position = 'relative';
+  el.style.width = '15px';
+  el.style.height = '15px';
   el.style.cursor = 'pointer';
 
-  // иконка
+  // кружок (центр геолокации)
   const icon = document.createElement('div');
   icon.style.width = '15px';
   icon.style.height = '15px';
@@ -75,21 +75,29 @@ window.onload = () => {
   icon.style.backgroundSize = 'contain';
   icon.style.backgroundRepeat = 'no-repeat';
 
-  // подпись
+  // подпись (НЕ участвует в геопривязке)
   const label = document.createElement('div');
+  label.className = 'project-label';
   label.textContent = project.name;
-  label.style.fontSize = '11px';
+  label.style.position = 'absolute';
+  label.style.top = '18px';
+  label.style.bottom = 'auto';
+  label.style.left = '50%';
+  label.style.transform = 'translateX(-50%)';
   label.style.whiteSpace = 'nowrap';
+  label.style.fontSize = '11px';
   label.style.background = 'rgba(255,255,255,0.85)';
   label.style.padding = '2px 5px';
   label.style.borderRadius = '4px';
-  label.style.marginTop = '2px';
-  label.style.pointerEvents = 'none'; // важно!
+  label.style.pointerEvents = 'none'; // клики идут в кружок
 
   el.appendChild(icon);
   el.appendChild(label);
 
-  const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
+  const marker = new maplibregl.Marker({
+    element: el,
+    anchor: 'center'   // центр кружка = координата
+  })
     .setLngLat([project.lng, project.lat])
     .addTo(map);
 
