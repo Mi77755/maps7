@@ -1,3 +1,4 @@
+
 window.onload = () => {
   const mapContainer = document.getElementById('map');
   const projectList = document.getElementById('project-list');
@@ -29,8 +30,8 @@ window.onload = () => {
           coordinates: [
             [6.627, 47.092],
             [18.520, 47.092],
-            [18.520, 36.643],
-            [6.627, 36.643]
+            [18.520, 36.640],
+            [6.627, 36.640]
           ]
         }
       },
@@ -47,46 +48,58 @@ window.onload = () => {
     dragPan: true // можно отключить, если нужно
   });
 
-  // ❌ полностью фиксируем карту
+// ❌ полностью фиксируем карту
   map.dragPan.disable();
   map.scrollZoom.disable();
   map.doubleClickZoom.disable();
   map.boxZoom.disable();
   map.keyboard.disable();
   map.touchZoomRotate.disable();
-  
-  // Добавление маркера на карту
+
   function addProjectToMap(project) {
-    if (project.marker) return;
+  if (project.marker) return;
 
-    const el = document.createElement('div');
-    el.className = 'project-marker';
-    el.style.width = '15px';
-    el.style.height = '15px';
-    el.style.backgroundImage = 'url("img/circle.png")';
-    el.style.backgroundSize = 'contain';
-    el.style.backgroundRepeat = 'no-repeat';
-    el.style.backgroundPosition = 'center';
-    el.style.cursor = 'pointer';
+  // контейнер маркера
+  const el = document.createElement('div');
+  el.style.display = 'flex';
+  el.style.flexDirection = 'column';
+  el.style.alignItems = 'center';
+  el.style.transform = 'translate(-50%, -100%)'; // важное!
+  el.style.cursor = 'pointer';
 
-    // Поп-ап с названием проекта
-    const popup = new maplibregl.Popup({ offset: 25, closeButton: false, closeOnClick: true })
-      .setText(project.name);
+  // иконка
+  const icon = document.createElement('div');
+  icon.style.width = '15px';
+  icon.style.height = '15px';
+  icon.style.backgroundImage = 'url("img/circle.png")';
+  icon.style.backgroundSize = 'contain';
+  icon.style.backgroundRepeat = 'no-repeat';
 
-    const marker = new maplibregl.Marker(el)
-      .setLngLat([project.lng, project.lat])
-      .setPopup(popup)
-      .addTo(map);
+  // подпись
+  const label = document.createElement('div');
+  label.textContent = project.name;
+  label.style.fontSize = '11px';
+  label.style.whiteSpace = 'nowrap';
+  label.style.background = 'rgba(255,255,255,0.85)';
+  label.style.padding = '2px 5px';
+  label.style.borderRadius = '4px';
+  label.style.marginTop = '2px';
+  label.style.pointerEvents = 'none'; // важно!
 
-    // Клик открывает правую панель
-    el.addEventListener('click', (e) => {
-      e.stopPropagation(); // чтобы карта не перехватывала
-      openDetails(project);
-    });
+  el.appendChild(icon);
+  el.appendChild(label);
 
-    project.marker = marker;
-  }
+  const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
+    .setLngLat([project.lng, project.lat])
+    .addTo(map);
 
+  el.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openDetails(project);
+  });
+
+  project.marker = marker;
+}
   // Открытие правой панели с информацией
   function openDetails(project) {
     rightPanel.classList.add('active');
@@ -209,6 +222,4 @@ window.onload = () => {
 
     form.reset();
   });
-
 };
-
