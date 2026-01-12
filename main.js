@@ -59,47 +59,48 @@ window.onload = () => {
   function addProjectToMap(project) {
   if (project.marker) return;
 
-  // контейнер = геоякорь
+  // геоякорь — строго кружок
   const el = document.createElement('div');
   el.className = 'project-marker';
-  el.style.position = 'relative';
   el.style.width = '15px';
   el.style.height = '15px';
   el.style.cursor = 'pointer';
 
-  // кружок (центр геолокации)
-  const icon = document.createElement('div');
-  icon.style.width = '15px';
-  icon.style.height = '15px';
-  icon.style.backgroundImage = 'url("img/circle.png")';
-  icon.style.backgroundSize = 'contain';
-  icon.style.backgroundRepeat = 'no-repeat';
+  // иконка
+  el.style.backgroundImage = 'url("img/circle.png")';
+  el.style.backgroundSize = 'contain';
+  el.style.backgroundRepeat = 'no-repeat';
 
-  // подпись (НЕ участвует в геопривязке)
+  // подпись (НЕ внутри геоякоря!)
   const label = document.createElement('div');
   label.className = 'project-label';
   label.textContent = project.name;
   label.style.position = 'absolute';
-  label.style.top = '18px';
-  label.style.bottom = 'auto';
-  label.style.left = '50%';
-  label.style.transform = 'translateX(-50%)';
   label.style.whiteSpace = 'nowrap';
   label.style.fontSize = '11px';
   label.style.background = 'rgba(255,255,255,0.85)';
   label.style.padding = '2px 5px';
   label.style.borderRadius = '4px';
-  label.style.pointerEvents = 'none'; // клики идут в кружок
+  label.style.pointerEvents = 'none';
 
-  el.appendChild(icon);
-  el.appendChild(label);
+  // добавляем подпись поверх карты
+  map.getCanvasContainer().appendChild(label);
 
   const marker = new maplibregl.Marker({
     element: el,
-    anchor: 'center'   // центр кружка = координата
+    anchor: 'center'
   })
     .setLngLat([project.lng, project.lat])
     .addTo(map);
+
+  function updateLabelPosition() {
+    const pos = map.project([project.lng, project.lat]);
+    label.style.left = `${pos.x}px`;
+    label.style.top = `${pos.y + 18}px`; // ↓ подпись снизу
+  }
+
+  updateLabelPosition();
+  map.on('move', updateLabelPosition);
 
   el.addEventListener('click', (e) => {
     e.stopPropagation();
