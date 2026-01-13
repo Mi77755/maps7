@@ -11,25 +11,54 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: Franklin Gothic Book;
-  font-size: 24pt;
   font-color: #2a2e32;
+}
+
+.project-label {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 12px;
+  font-family: Franklin Gothic Book Heavy;
+  color: white;
+  background: #8291a4;
+  padding: 3px 7px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.1);
+
+  pointer-events: fire;
+  transform: translateX(-50%);
+}
+
+.project-label::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(255,255,255,0.9);
 }
 
 .project-buttons {
   flex-shrink: 0;
   margin-left: 5px;
+  border: transparent;
 }
 
 .project-buttons button {
   margin-left: 2px;
+  border: transparent;
 }
 
 /* Правая панель */
 #right-panel {
-  width: 280px;
-  padding: 30px;
+  width: 300px;
+  padding: 10px;
   background: white;
-  border-left: 1px solid #2a2e32;
+  border-left: 1px solid #ccc;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -39,15 +68,33 @@
 
 /* левая панель */
 #left-panel {
-  width: 280px;
-  padding: 30px;
+  width: 200px;
+  padding: 15px;
   background: white;
-  border-right: 1px solid #2a2e32;
+  border-right: 1px solid #ccc;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   font-family: Franklin Gothic Book;
   font-color: #2a2e32;
+}
+
+#project.name {
+  width: 100px;
+  padding: 15px;
+  background: #2a2e32;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  font-family: Franklin Gothic Book;
+  font-color: #2a2e32;
+}
+
+#project-list {
+  list-style: none;      /* убираем маркеры */
+  padding-left: 0;       /* ❗ главный виновник */
+  margin-left: 0;
 }
 
 /* Контейнер описания/редактирования */
@@ -99,10 +146,4 @@
   border-radius: 0 !important;
   z-index: 1000;
 }
-
-
-
-
-
-
 
