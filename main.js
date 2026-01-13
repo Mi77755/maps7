@@ -78,7 +78,7 @@ window.onload = () => {
   label.style.position = 'absolute';
   label.style.whiteSpace = 'nowrap';
   label.style.fontSize = '11px';
-  label.style.background = 'rgba(255,255,255,0.85)';
+  label.style.background = 'rgba(#2a2e32)';
   label.style.padding = '2px 5px';
   label.style.borderRadius = '4px';
   label.style.pointerEvents = 'none';
